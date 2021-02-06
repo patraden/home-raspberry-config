@@ -49,11 +49,17 @@ $ az storage blob upload --container-name mytestcontainer --file ./denis_automat
 $ az storage blob upload --container-name mytestcontainer --file ./denis_automation_number_sys_id.json --name denis_automation_number_sys_id.json
 $ az storage blob list --container-name mytestcontainer --output table
 ```
-### Mars resources
-resource group: RUSSIA-DEMAND-ANALYTICS-PETCARE-DEV-RG
-service (dev): russiademandanalyticspetcaredevadb
-Notebook path: Workspace/Users/peter.sosov@effem.com/TANDER_MATRIX/for_Denis_TANDER_MATRIX_ADB_NOTEBOOK (1)
-cluster to execute on: DATA_TEAM_CLUSTER
+### Mars resources management
+```bash
+# resource group: RUSSIA-DEMAND-ANALYTICS-PETCARE-DEV-RG
+# service (dev): russiademandanalyticspetcaredevadb
+# Notebook path: Workspace/Users/peter.sosov@effem.com/TANDER_MATRIX/for_Denis_TANDER_MATRIX_ADB_NOTEBOOK (1)
+# cluster to execute on: DATA_TEAM_CLUSTER
+$ az login
+$ az dls fs list --account marsanalyticsdevadls --path / --out table
+$ az dls fs list --account marsanalyticsdevadls --path /OUTPUT/RUSSIA_DEMAND_ANALYTICS_PETCARE/UNIVERSAL_CATALOG --out table
+$ az dls fs download --account marsanalyticsdevadls --source-path /OUTPUT/RUSSIA_DEMAND_ANALYTICS_PETCARE/UNIVERSAL_CATALOG/MARS_UNIVERSAL_CALENDAR.csv --destination-path ~
+```
 
 ## spark tutorial https://www.youtube.com/watch?v=IQfG0faDrzE
 ```bash
