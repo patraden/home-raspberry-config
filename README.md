@@ -55,10 +55,25 @@ $ az storage blob list --container-name mytestcontainer --output table
 # service (dev): russiademandanalyticspetcaredevadb
 # Notebook path: Workspace/Users/peter.sosov@effem.com/TANDER_MATRIX/for_Denis_TANDER_MATRIX_ADB_NOTEBOOK (1)
 # cluster to execute on: DATA_TEAM_CLUSTER
+
+# Информация о продажах и стоках (по дням) приходит непосредственно от Tander-а
+# Бизнес хочет как-то мониторить, что из того, что они хотят продавать, по факту продается
+# Бизнес-планы представлены в виде матриц (точка, 1|0)
+# 1 - предполагаются продажи, 0 - не предполагаются продажи
+# Логика версионирования присутствует для проверки, пришел ли новый файл
+
 $ az login
 $ az dls fs list --account marsanalyticsdevadls --path / --out table
 $ az dls fs list --account marsanalyticsdevadls --path /OUTPUT/RUSSIA_DEMAND_ANALYTICS_PETCARE/UNIVERSAL_CATALOG --out table
-$ az dls fs download --account marsanalyticsdevadls --source-path /OUTPUT/RUSSIA_DEMAND_ANALYTICS_PETCARE/UNIVERSAL_CATALOG/MARS_UNIVERSAL_CALENDAR.csv --destination-path ~
+
+# working on notebook (loading initial data)
+$ az dls fs download --account marsanalyticsdevadls --source-path /RAW/FILES/RUSSIA_DEMAND_ANALYTICS_PETCARE/SOURCES/TANDER_MATRIX/ --destination-path ~/TANDER_MATRIX/
+# installing preparing pandas
+$ sudo apt update
+$ sudo apt install python3-pip
+$ pip3 --version
+$ sudo pip3 install pandas
+$ sudo pip3 install openpyxl
 ```
 
 ## spark tutorial https://www.youtube.com/watch?v=IQfG0faDrzE
@@ -71,6 +86,7 @@ $ tar xvzf jdk-15.0.2_linux-aarch64_bin.tar.gz
 $ cat << EOF >> ~/.bashrc
 export JAVA_HOME=/home/ubuntu/jdk/jdk-15.0.2
 export PATH=\$PATH:\$JAVA_HOME/bin
+export PYTHONPATH=$SPARK_HOME/python/:$PYTHONPATH
 EOF
 $ source ~/.bashrc
 
