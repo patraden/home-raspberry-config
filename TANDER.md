@@ -39,6 +39,14 @@ DB data set name 2 | TANDER_ANALYTICS_STOCK_OL_SQLDB_DS
 DB data set name 2 path | [dbo].[SL_OT_TANDER_STOCK_OL]
 
 #### temp files (matrix & store)
-* az dls fs create --account marsanalyticsdevadls --path PROCESS/RUSSIA_DEMAND_ANALYTICS_PETCARE/TANDER_ANALYTICS/TMP_MATRIX.PARQUET/
-* az dls fs create --account marsanalyticsdevadls --path PROCESS/RUSSIA_DEMAND_ANALYTICS_PETCARE/TANDER_ANALYTICS/TMP_STORE.PARQUET/
-* az dls fs create --account marsanalyticsdevadls --path PROCESS/RUSSIA_DEMAND_ANALYTICS_PETCARE/TANDER_ANALYTICS/TMP_FULLPLAN.PARQUET/
+```bash
+az dls fs create --account marsanalyticsdevadls --path PROCESS/RUSSIA_DEMAND_ANALYTICS_PETCARE/TANDER_ANALYTICS/TMP_MATRIX.PARQUET/
+az dls fs create --account marsanalyticsdevadls --path PROCESS/RUSSIA_DEMAND_ANALYTICS_PETCARE/TANDER_ANALYTICS/TMP_STORE.PARQUET/
+az dls fs create --account marsanalyticsdevadls --path PROCESS/RUSSIA_DEMAND_ANALYTICS_PETCARE/TANDER_ANALYTICS/TMP_FULLPLAN.PARQUET/
+```
+#### fising dict files
+```bash
+az dls fs download --account marsanalyticsdevadls --source-path /PROCESS/RUSSIA_DEMAND_ANALYTICS_PETCARE/TANDER_ANALYTICS/DICTIONARIES/2019/11/06/Mars_pets_food_whs_catalog_weekly_201944.txt --destination-path ~/TANDER_MATRIX/2019/11/06/Mars_pets_food_whs_catalog_weekly_201944.txt
+az dls fs download --account marsanalyticsdevadls --source-path /PROCESS/RUSSIA_DEMAND_ANALYTICS_PETCARE/TANDER_ANALYTICS/DICTIONARIES/2020/01/28/Mars_pets_food_whs_catalog_weekly_202004.txt --destination-path ~/TANDER_MATRIX/2020/01/28/Mars_pets_food_whs_catalog_weekly_202004.txt
+az dls fs download --account marsanalyticsdevadls --source-path /PROCESS/RUSSIA_DEMAND_ANALYTICS_PETCARE/TANDER_ANALYTICS/DICTIONARIES/2020/03/31/Mars_pets_food_whs_catalog_weekly_202013.txt --destination-path ~/TANDER_MATRIX/2020/03/31/Mars_pets_food_whs_catalog_weekly_202013.txt
+```
