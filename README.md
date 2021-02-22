@@ -1,5 +1,5 @@
 ## *installation guide for raspberry PI on ubuntu server*
-###### [install ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu)
+* [install ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu)
 ```bash
 sudo apt update
 sudo apt upgrade
@@ -11,8 +11,8 @@ ansible --version
 ```
 
 ## *configuring inventory and ssh keys for ansible clients*
-###### [inventory](https://docs.ansible.com/ansible/2.3/intro_inventory.html)
-###### [ssh keys](https://docs.ansible.com/ansible/latest/collections/ansible/posix/authorized_key_module.html)
+* [inventory](https://docs.ansible.com/ansible/2.3/intro_inventory.html)
+* [ssh keys](https://docs.ansible.com/ansible/latest/collections/ansible/posix/authorized_key_module.html)
 ```bash
 sudo mkdir playbooks
 sudo apt install whois -y
@@ -36,6 +36,6 @@ ansible-playbook deploy-ssh-keys.yml --ask-pass --flush-cache
 ```
 
 ## *playbooks for docker configuration*
-###### [docker install on ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+* [docker install on ubuntu](https://docs.docker.com/engine/install/ubuntu/)
 ```bash
 ```
