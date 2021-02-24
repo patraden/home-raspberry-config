@@ -37,5 +37,6 @@ ansible-playbook deploy-ssh-keys.yml --ask-pass --flush-cache
 
 ## *playbooks for docker configuration*
 * [docker install on ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+* [ansible guide](https://docs.ansible.com/ansible/latest/scenario_guides/guide_docker.html)
 ```bash
 ```

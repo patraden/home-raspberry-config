@@ -1,3 +1,36 @@
+
+```python
+ENGAGEMENT = spark.read.format("parquet").load('/mnt/OUTPUT/RUSSIA_DEMAND_ANALYTICS_PETCARE/TANDER_MATRIX/TANDER_MATRIX_ENGAGEMENT_FDM.PARQUET')
+TNDR_STOCK_TT = spark.read.format("parquet").load('mnt/OUTPUT/RUSSIA_DEMAND_ANALYTICS_PETCARE/TANDER_ANALYTICS/TNDR_STOCK_TT.PARQUET')
+
+STOCK_VOR = TNDR_STOCK_TT.join(FULLDICT, "Code", 'left').drop(TNDR_STOCK_TT.Branch).drop(TNDR_STOCK_TT.RC)\
+                     .where(col("Year") >= 2020).where(col("ProductCode") == "1000177254")\
+                     .where(col("Format").isin(["ГМ","МД"]))\
+                     .where((col("Branch").contains("Белгород")) | (col("Branch").contains("Воронеж")))\
+                     .where(col("RC").contains("Воронеж"))\
+                     .groupBy(col("Year"),col("Week"))\
+                     .agg(count(col("Code")).alias("count_code_STOCK")).orderBy(col("Year"),col("Week"), ascending = [0,0])
+
+ENGAGEMENT_VOR = ENGAGEMENT.where(col("CalendarYearForWeek") >= 2020)\
+                     .where(col("BrandCode") == "1000177254")\
+                     .where(col("RC").contains("Воронеж"))\
+                     .where(col("Format").isin(["ГМ","МД"]))\
+                     .where((col("Filial").contains("Белгород")) | (col("Filial").contains("Воронеж")))\
+                     .groupBy(col("CalendarYearForWeek"),col("CalendarWeek"))\
+                     .agg(sum(col("outlet_qty_in_stock")).alias("sum_outlet_qty_in_stock"))\
+                     .orderBy(col("CalendarYearForWeek"),col("CalendarWeek"), ascending = [0,0])
+
+DICT_VOR = FULLDICT.where((col("Branch")\
+                   .contains("Белгород")) | (col("Branch").contains("Воронеж")))\
+                   .where(col("Format").isin(["ГМ","МД"])).where(col("RC").contains("РЦ Воронеж"))
+
+
+display(DICT_VOR.groupBy(col("LatestVersion")).count())
+display(STOCK_VOR.withColumn("perc", col("count_code_STOCK")/593))
+display(ENGAGEMENT_VOR)
+```
+
+
 ### TANDER case notes
 ### source of data for BI reports
 * Сервер для подключения: marsanalyticsdevsqlsrv.database.windows.net
