@@ -28,7 +28,7 @@ DICT_VOR = FULLDICT.where((col("Branch")\
 display(DICT_VOR.groupBy(col("LatestVersion")).count())
 display(STOCK_VOR.withColumn("perc", col("count_code_STOCK")/593))
 display(ENGAGEMENT_VOR)
-
+```
 ```python
 def is_equal_schemas(a:StructType(), b:StructType()):
   """
@@ -42,6 +42,10 @@ def is_equal_schemas(a:StructType(), b:StructType()):
   b_sorted = sorted(b, key = lambda x: x.name)
   result = map(lambda x,y: x.name == y.name and x.dataType == y.dataType, a_sorted, b_sorted)
   return reduce(lambda res, x: res and x, result)
+
+DICT_FILES = glob.glob("/dbfs" + TANDER_DIR + "DICTIONARIES/**" + DICT_WILDCARD, recursive=True)
+DICT_FILES_DICT = dict(map(lambda x: (re.search(r'([0-9]{6})', x).group(0), x), DICT_FILES))
+DICT_FILES_DICT_SORTED = {key: DICT_FILES_DICT[key] for key in sorted(DICT_FILES_DICT, key = lambda x: int(x))}
 ```
 
 ### TANDER case notes
