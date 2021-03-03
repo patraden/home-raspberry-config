@@ -28,8 +28,21 @@ DICT_VOR = FULLDICT.where((col("Branch")\
 display(DICT_VOR.groupBy(col("LatestVersion")).count())
 display(STOCK_VOR.withColumn("perc", col("count_code_STOCK")/593))
 display(ENGAGEMENT_VOR)
-```
 
+```python
+def is_equal_schemas(a:StructType(), b:StructType()):
+  """
+  Helper function to compare dataframe schemas.
+  Returns True if all Names, Types of each StructField match.
+  False otherwise.
+  """
+  if len(a) != len(b):
+    return False
+  a_sorted = sorted(a, key = lambda x: x.name)
+  b_sorted = sorted(b, key = lambda x: x.name)
+  result = map(lambda x,y: x.name == y.name and x.dataType == y.dataType, a_sorted, b_sorted)
+  return reduce(lambda res, x: res and x, result)
+```
 
 ### TANDER case notes
 ### source of data for BI reports
